@@ -16,6 +16,7 @@
     "vite": "^6.2.0"
   },
   "dependencies": {
-    "@lazarv/react-server": "^0.0.0-experimental-bb46e35-20250304-3af0ffd9"
+    "@lazarv/react-server": "^0.0.0-experimental-bb46e35-20250304-3af0ffd9",
+    "lucide-react": "^0.477.0"
   }
 }

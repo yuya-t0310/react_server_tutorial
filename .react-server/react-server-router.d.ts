@@ -59,7 +59,7 @@ declare namespace __react_server_routing__ {
       ? ExtractParams<T>
       : never;
 
-  type Outlet = never;
+  type Outlet = `pageName`;
 }
 
 declare module "@lazarv/react-server/navigation" {
