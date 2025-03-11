@@ -29,12 +29,14 @@ export const getPopular = query({
   },
   handler: async (ctx, args) => {
     const { limit } = args;
-    const articles = await ctx.db.query("articles").collect();
+    let articles = [];
+    articles = await ctx.db.query("articles").collect();
 
-    // const sortedArticles = articles
-    //   .sort((a, b) => b.viewCount - a.viewCount)
-    //   .slice(0, limit ?? 10);
-    return articles.map((article) => {
+    const sortedArticles = articles
+    .sort((a, b) => b.viewCount - a.viewCount)
+    .slice(0, limit ?? 10);
+
+    return sortedArticles?.map((article) => {
       return {
         id: article._id,
         title: article.title,
