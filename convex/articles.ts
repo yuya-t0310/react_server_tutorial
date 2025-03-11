@@ -1,5 +1,5 @@
-import { query, mutation } from "./_generated/server";
 import { v } from "convex/values";
+import { mutation, query } from "./_generated/server";
 
 export const get = query({
   args: {},
@@ -29,14 +29,12 @@ export const getPopular = query({
   },
   handler: async (ctx, args) => {
     const { limit } = args;
-    let articles = [];
-    articles = await ctx.db.query("articles").collect();
+    const articles = await ctx.db.query("articles").collect();
 
     const sortedArticles = articles
-      .sort((a, b) => b.viewCount - a.viewCount)
+      .sort((a, b) => (b.viewCount ?? 0) - (a.viewCount ?? 0))
       .slice(0, limit ?? 10);
-
-    return sortedArticles?.map((article) => {
+    return sortedArticles.map((article) => {
       return {
         id: article._id,
         title: article.title,
@@ -58,8 +56,47 @@ export const insert = mutation({
     await ctx.db.insert("articles", {
       title,
       description,
-      author: "@nameless_author",
+      author: "@Sicut_study",
       viewCount: 0,
+    });
+  },
+});
+
+// 追加
+export const getById = query({
+  args: {
+    id: v.id("articles"),
+  },
+  handler: async (ctx, { id }) => {
+    const article = await ctx.db.get(id);
+    if (!article) {
+      throw new Error("Article not found");
+    }
+
+    return {
+      id: article._id,
+      title: article.title,
+      description: article.description,
+      author: article.author,
+      createdAt: article._creationTime,
+      viewCount: article.viewCount,
+    };
+  },
+});
+
+// 追加
+export const incrementViewCount = mutation({
+  args: {
+    id: v.id("articles"),
+  },
+  handler: async (ctx, { id }) => {
+    const article = await ctx.db.get(id);
+    if (!article) {
+      throw new Error("Article not found");
+    }
+
+    await ctx.db.patch(article._id, {
+      viewCount: article.viewCount + 1,
     });
   },
 });
