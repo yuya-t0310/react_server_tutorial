@@ -1,4 +1,4 @@
-import { query } from "./_generated/server";
+import { query, mutation } from "./_generated/server";
 import { v } from "convex/values";
 
 export const get = query({
@@ -33,8 +33,8 @@ export const getPopular = query({
     articles = await ctx.db.query("articles").collect();
 
     const sortedArticles = articles
-    .sort((a, b) => b.viewCount - a.viewCount)
-    .slice(0, limit ?? 10);
+      .sort((a, b) => b.viewCount - a.viewCount)
+      .slice(0, limit ?? 10);
 
     return sortedArticles?.map((article) => {
       return {
@@ -45,6 +45,21 @@ export const getPopular = query({
         createdAt: article._creationTime,
         viewCount: article.viewCount,
       };
+    });
+  },
+});
+
+export const insert = mutation({
+  args: {
+    title: v.string(),
+    description: v.string(),
+  },
+  handler: async (ctx, { title, description }) => {
+    await ctx.db.insert("articles", {
+      title,
+      description,
+      author: "@nameless_author",
+      viewCount: 0,
     });
   },
 });
