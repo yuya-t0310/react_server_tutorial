@@ -32,19 +32,33 @@ export default async function Home() {
         <p className="text-xl text-gray-600 mb-8">
           Discover and share valuable insights in technology.
         </p>
-        <Link 
+        <Link
           to="/editor"
-          className="inline-flex item-center bg-teal-600 text-white px-6 py-3 rounded-md hover:bg-teal-700 transition duration-300">
-            Start Writing <ArrowRight className="m1-2" size={20} />
-          </Link>
+          className="inline-flex item-center bg-teal-600 text-white px-6 py-3 rounded-md hover:bg-teal-700 transition duration-300"
+        >
+          Start Writing <ArrowRight className="m1-2" size={20} />
+        </Link>
       </div>
 
       <div className="mb-12">
-        <div className="flex items-center mb-8">
-          <Clock size={24} className="text-gray-600 mr-2" />
-          <h2 className="text-2xl font-bold text-gray-900">Latest Articles</h2>
+        <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center">
+            <Clock size={24} className="text-gray-600 mr-2" />
+            <h2 className="text-2xl font-bold text-gray-900">
+              Latest Articles
+            </h2>
+          </div>
+          <Link
+            to="/blogs"
+            className="inline-flex items-center text-teal-600 hover:text-teal-700"
+          >
+            View All
+            <ArrowRight className="w-5 h5 ml-1" />
+          </Link>
         </div>
-        <LatestArticleList />
+        <div>
+          <LatestArticleList />
+        </div>
       </div>
 
       <div className="mb-12">
@@ -55,15 +69,16 @@ export default async function Home() {
               Popular Articles
             </h2>
           </div>
-          <Link 
+          <Link
             to="/popular"
-            className="inline-flex items-center text-teal-600 hover:text-teal-700">
-              View All
-              <ArrowRight className="w-5 h5 ml-1" />
+            className="inline-flex items-center text-teal-600 hover:text-teal-700"
+          >
+            View All
+            <ArrowRight className="w-5 h5 ml-1" />
           </Link>
         </div>
         <PopularArticleList articles={articles} />
       </div>
     </div>
-  )
+  );
 }

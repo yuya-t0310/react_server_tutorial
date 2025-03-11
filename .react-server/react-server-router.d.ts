@@ -26,9 +26,9 @@ declare namespace __react_server_routing__ {
   type OptionalCatchAllSlug<S extends string> =
     S extends `${string}${SearchOrHash}` ? never : S;
 
-  type StaticRoutes = "/" | "/blogs" | "/ConvexClientProvider" | "/editor" | "/popular" | "/page/tsx";
+  type StaticRoutes = "/" | "/blogs" | "/ConvexClientProvider" | "/editor" | "/popular";
   type DynamicRoutes<T0 extends string> =
-    | `/article/${SafeSlug<T0>}`;
+    | `/articles/${SafeSlug<T0>}`;
 
   type RouteImpl<T> =
     | StaticRoutes
