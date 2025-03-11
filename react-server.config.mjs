@@ -1,3 +1,6 @@
 export default {
-  root: "src/app"
+  root: "src/app",
+  export(paths) {
+    return [...paths, { path: "/popular"}];
+  },
 }

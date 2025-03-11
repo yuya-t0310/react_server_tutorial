@@ -1,0 +1,1 @@
+import{r as e,g as r}from"../../react.BboN7MDb.mjs";var t=e();const n=r(t),s="PAGE_ROOT",o=t.createContext({}),c=t.createContext({url:"/",outlet:null,refresh:()=>{},prefetch:()=>{},navigate:()=>{},replace:()=>{},abort:()=>{}}),l=t.createContext({resourceKey:0,error:null});function u(){return t.useContext(o)}export{o as C,c as F,s as P,n as R,l as a,t as r,u};
